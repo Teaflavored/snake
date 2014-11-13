@@ -1,6 +1,6 @@
 #game{
   margin: 0 auto;
-  margin-top: 50px;
+  margin-top: 10px;
   width:500px;
   height:500px;
   position:relative;
@@ -15,6 +15,7 @@
 h3{
   font-size:0.93em;
   font-weight:none;
+  margin-bottom:0px
 }
 .heading{
   text-align: center;
@@ -22,6 +23,7 @@ h3{
 h1{
   font-size:70px;
   margin-bottom: 20px;
+  margin-top:10px;
 }
 
 .row{
