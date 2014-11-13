@@ -1,9 +1,9 @@
 (function(){
-  
+
   if (typeof Snakes == "undefined"){
     window.Snakes = {}
   }
-    
+
   var SnakeView = window.Snakes.SnakeView = function($el){
 
     this.$el = $el;
@@ -17,34 +17,30 @@
     console.log($counter)
     $counter.text("Current Apples: " + this.board.snake.eatenApples)
   }
-  
+
   SnakeView.prototype.drawRestart = function(){
     var canvas = document.getElementById("canvas")
     var ctx = canvas.getContext("2d");
-    ctx.fillStyle = "black";
-    // ctx.strokeStyle = "#000"
-    // ctx.lineWidth = 0.1;
-    // ctx.fillRect(0, 0, 500, 500);
-    // Fill with gradient
-    ctx.font="60px Verdana";
-    // ctx.fillStyle="white";
-    ctx.fillText("Hi", 200, 200)
+    ctx.fillStyle = "#000000";
+    ctx.font = ' 12pt Arial bold';
+    ctx.fillText("Press R to Restart!",90,75);
+    ctx.fillText("You've lost!", 110, 60)
   }
-  
-  SnakeView.prototype.run = function() {  
+
+  SnakeView.prototype.run = function() {
     var restartCallback = function(event){
       var key = event.which;
       if(key == 82){
         this.run();
       }
     }
-    
+
     this.refreshId && clearInterval(this.refreshId);
     this.$el.off();
     this.turnSnake();
-    
+
     this.toPlay = true;
-    
+
     var that = this;
     this.refreshId = window.setInterval(function() {
       if(that.toPlay === true) {
@@ -52,22 +48,22 @@
         that.updateCounter();
         that.board.updateBoard();
       }
-      
+
       if (that.board.snake.lost()){
         that.toPlay = false;
         that.$el.on('keydown', restartCallback.bind(that))
         that.board = new Snakes.Board();
         that.drawRestart();
       }
-      
+
       if(that.toPlay === true){
         that.drawBoard();
       }
-      
-      
+
+
     }, 100);
   }
-  
+
   SnakeView.prototype.turnSnake = function (){
     var that = this;
     this.$el.on('keydown', function(event){
@@ -88,8 +84,8 @@
       }
     });
   }
-  
-  
+
+
   SnakeView.prototype.drawBoard = function() {
     var str = ""
     for (var i = 0; i < Snakes.Board.DIMENSION; i++) {

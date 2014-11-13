@@ -2,15 +2,15 @@
   if (typeof Snakes == "undefined"){
     window.Snakes = {}
   }
-  
+
   var Board = window.Snakes.Board = function(){
     this.snake = new Snakes.Snake(this);
     this.grid = [];
     this.setupBoard();
     this.apples = [];
-    
+
   }
-  
+
   Board.prototype.setupBoard = function(){
     this.grid = [];
     for(var i = 0; i < Board.DIMENSION; i++){
@@ -20,7 +20,7 @@
       }
     }
   }
-  
+
   Board.prototype.generateApple = function(){
     var x = Math.floor(Math.random() * Board.DIMENSION);
     var y = Math.floor(Math.random() * Board.DIMENSION);
@@ -29,16 +29,16 @@
       this.insertApple();
     }
   }
-  
+
   Board.prototype.isOccupied = function(pos){
     if (this.grid[pos[0]][pos[1]] === "S" || this.grid[pos[0]][pos[1]] === "A"){
       return true;
     } else {
       return false;
     }
-    
+
   }
-  
+
   Board.prototype.updateBoard = function(){
     this.setupBoard();
     this.insertSnake();
@@ -47,8 +47,8 @@
     }
     this.insertApple();
   }
-  
-  
+
+
   // Board.prototype.render = function(){
 //     this.setupBoard();
 //     this.insertSnake();
@@ -73,18 +73,18 @@
     }
     this.grid[pos.x][pos.y] = mark;
   }
-  
+
   Board.prototype.insertSnake = function(){
     for(var i = 0; i < this.snake.segments.length; i++){
       this.placeOnGrid(this.snake.segments[i], "S");
     }
   }
-  
+
   Board.prototype.insertApple = function(){
     for(var i = 0; i < this.apples.length; i++){
       this.placeOnGrid(this.apples[i], "A");
     }
   }
-  
-  Board.DIMENSION = 50;
+
+  Board.DIMENSION = 25;
 })();
